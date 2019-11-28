@@ -26,6 +26,17 @@ Most of the time voice communication is just a barrier in *VoIP Industry* due to
 - Automatic gain control problems
 - Noise reduction and suppression
 
+There is two general approaches to audio programming in Android, either to use built-in (SDK) or use (NDK) approach. If you wan to stay in the SDK in java, with [AudioRecord](https://developer.android.com/reference/android/media/AudioRecord) & [AudioTrack](https://developer.android.com/reference/android/media/AudioTrack).
+
+1. The downside of first approach is that your audio processing also remains in java code, which could potentially be slower than compiled C code. The audio latency, without processing, is practically the same though.
+
+2. If you choose the NDK approach (C with OpenSL) over SDK (Java with AudioTrack), the setup will be more complex. So the very good example is to go with well-optimized audio-processing libraries such as;
+
+* [Speex](https://www.speex.org/)
+* [TarsosDSP](http://sapandiwakar.in/audio-processing-on-android-using-tarsosdsp/)
+* [Webrtc](https://chromium.googlesource.com/chromiumos/third_party/webrtc-apm/+/refs/heads/stabilize-12371.39.B/README.md)
+
+If you stick with Java, you will probably need a solid FFT library with support for Java (through a wrapper), so the best choice should be webrtc.
 
 ------
 **Features**
