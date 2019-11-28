@@ -94,7 +94,7 @@ After instantiation and configuration of APM module, now we'll look into account
 -------
 
 
-1. APM Initialization Event:
+1. APM Initialization Event
 ------
 
 In this event, we'll simply set the required parameter for AM such as the (sample rate), (audio capturing & playback device) and (number of channels) of local and remote audio stream such as;
@@ -258,7 +258,9 @@ Here is simple hierarchy of webrtc native stack inside *JNI-Folder* of android p
 -------
 
 Here is the content of the `<audioprocessing.h>` file:
-```class AudioFrame;
+
+```
+class AudioFrame;
 
 template<typename T>
 class Beamformer;
@@ -272,4 +274,209 @@ class GainControl;
 class HighPassFilter;
 class LevelEstimator;
 class NoiseSuppression;
-class VoiceDetection;```
+class VoiceDetection;
+
+```
+
+* AudioFrame: It mainly records the channel basic information, data, VAD mark time stamp, sampling frequency, channel number, etc.
+
+* EchoCancellation: Echo Cancellation Module (AEC). It should be used when using external speakers. In some cases using headset communication, echo will also exist (because the microphone has a space or weak electrical coupling with the speaker). If it affects the call, it should be turned on .
+
+* EchoControlMobile: Echo Suppression Module (AES). This module is similar to the echo cancellation module in function, but the implementation method is different. This module is implemented using a fixed telephone, and the amount of calculation is much smaller than the echo cancellation module. Ideal for mobile platforms. But the speech damage is great.
+
+* GainControl: Gain Control Module (AGC). This module uses the characteristics of the voice to adjust the system hardware volume and the output signal size. The input volume can be controlled on the hardware. The software can only adjust the amplitude of the original signal. If the original signal has been broken, or the input signal is relatively small, there is nothing to do.
+
+* HighPassFilter: A high-pass filter that suppresses unwanted low-frequency signals. Internally, this is done using a customized IIR. You can modify the parameters to select the corresponding cut-off frequency. For some equipment with power frequency interference, a high-pass filter is required.
+
+* LevelEstimator: Estimates the energy value of the signal.
+
+* NoiseSuppression: Noise Suppression Module (NS / SE). This module is generally used in the presence of environmental noise, or when the data collected by the microphone has obvious noise.
+
+* VoiceDetection: Voice activated detection module (VAD), which is used to detect the presence of voice. Used for codec and subsequent related processing. During a voice call, if one party is listening but not speaking, it will detect that no data has been collected at the output, and no data will be sent at this time. In this way, the sending status of the data is dynamically adjusted according to whether data is collected, and unnecessary waste of bandwidth is reduced.
+
+APM is divided into **two streams**,
+
+- A Near-End Stream (The near-end stream refers to the data entered from the microphone;)
+- A Far-End Stream ( The far-end stream refers to the received data;)
+
+ Now introduce them separately, this part of the code is in `<audio_processing_impl.cc>`, as given;
+
+To Process far-end stream:
+-------
+
+In this process, it involves 3-steps as given
+
+1. AEC process, recording farend and related operations in AEC;
+
+2. AES process, recording farend and related operations in AES;
+
+3. AGC process, calculating farend and its related features.
+
+
+```
+int AudioProcessingImpl::ProcessReverseStreamLocked() {
+  AudioBuffer* ra = render_.render_audio.get();
+  if (rev_analysis_needed()) {
+    ra->SplitIntoFrequencyBands();
+  }
+
+  if (capture_nonlocked_.intelligibility_enabled) {
+    public_submodules_->intelligibility_enhancer->ProcessRenderAudio(
+        ra->split_channels_f(kBand0To8kHz), capture_nonlocked_.split_rate,
+        ra->num_channels());
+  }
+
+  RETURN_ON_ERR(public_submodules_->echo_cancellation->ProcessRenderAudio(ra));
+  RETURN_ON_ERR(
+      public_submodules_->echo_control_mobile->ProcessRenderAudio(ra));
+  if (!constants_.use_experimental_agc) {
+    RETURN_ON_ERR(public_submodules_->gain_control->ProcessRenderAudio(ra));
+  }
+
+  if (rev_synthesis_needed()) {
+    ra->MergeFrequencyBands();
+  }
+
+  return kNoError;
+}
+
+```
+
+
+To Process near-end Streams
+------
+
+
+ Nearend's processing is comprehensive approach than far-end processing. It includes following steps to move accordingly which are given as follows;
+ 
+ 1. Frequency Division 
+ 2. High-Pass Filtering 
+ 3. AEC
+ 4. NS || NC
+ 5. AES 
+ 6. VAD 
+ 7. AGC 
+ 8. Frequency Band Combination 
+ 9. Volume Adjustment
+
+```
+
+int AudioProcessingImpl::ProcessStreamLocked() {
+  // Ensure that not both the AEC and AECM are active at the same time.
+  // Simplify once the public API Enable functions for these
+  // are moved to APM.
+  RTC_DCHECK(!(public_submodules_->echo_cancellation->is_enabled() &&
+               public_submodules_->echo_control_mobile->is_enabled()));
+
+#ifdef WEBRTC_AUDIOPROC_DEBUG_DUMP
+  if (debug_dump_.debug_file->is_open()) {
+    audioproc::Stream* msg = debug_dump_.capture.event_msg->mutable_stream();
+    msg->set_delay(capture_nonlocked_.stream_delay_ms);
+    msg->set_drift(
+        public_submodules_->echo_cancellation->stream_drift_samples());
+    msg->set_level(gain_control()->stream_analog_level());
+    msg->set_keypress(capture_.key_pressed);
+  }
+#endif
+
+  MaybeUpdateHistograms();
+
+  AudioBuffer* ca = capture_.capture_audio.get();
+
+  if (constants_.use_experimental_agc &&
+      public_submodules_->gain_control->is_enabled()) {
+    private_submodules_->agc_manager->AnalyzePreProcess(
+        ca->channels()[0], ca->num_channels(),
+        capture_nonlocked_.fwd_proc_format.num_frames());
+  }
+
+  if (fwd_analysis_needed()) {
+    ca->SplitIntoFrequencyBands();
+  }
+
+  if (capture_nonlocked_.beamformer_enabled) {
+    private_submodules_->beamformer->ProcessChunk(*ca->split_data_f(),
+                                                  ca->split_data_f());
+    ca->set_num_channels(1);
+  }
+
+  public_submodules_->high_pass_filter->ProcessCaptureAudio(ca);
+  RETURN_ON_ERR(public_submodules_->gain_control->AnalyzeCaptureAudio(ca));
+  public_submodules_->noise_suppression->AnalyzeCaptureAudio(ca);
+
+  // Ensure that the stream delay was set before the call to the
+  // AEC ProcessCaptureAudio function.
+  if (public_submodules_->echo_cancellation->is_enabled() &&
+      !was_stream_delay_set()) {
+    return AudioProcessing::kStreamParameterNotSetError;
+  }
+
+  RETURN_ON_ERR(public_submodules_->echo_cancellation->ProcessCaptureAudio(
+      ca, stream_delay_ms()));
+
+  if (public_submodules_->echo_control_mobile->is_enabled() &&
+      public_submodules_->noise_suppression->is_enabled()) {
+    ca->CopyLowPassToReference();
+  }
+  public_submodules_->noise_suppression->ProcessCaptureAudio(ca);
+  if (capture_nonlocked_.intelligibility_enabled) {
+    RTC_DCHECK(public_submodules_->noise_suppression->is_enabled());
+    int gain_db = public_submodules_->gain_control->is_enabled() ?
+                  public_submodules_->gain_control->compression_gain_db() :
+                  0;
+    public_submodules_->intelligibility_enhancer->SetCaptureNoiseEstimate(
+        public_submodules_->noise_suppression->NoiseEstimate(), gain_db);
+  }
+
+  // Ensure that the stream delay was set before the call to the
+  // AECM ProcessCaptureAudio function.
+  if (public_submodules_->echo_control_mobile->is_enabled() &&
+      !was_stream_delay_set()) {
+    return AudioProcessing::kStreamParameterNotSetError;
+  }
+
+  RETURN_ON_ERR(public_submodules_->echo_control_mobile->ProcessCaptureAudio(
+      ca, stream_delay_ms()));
+
+  public_submodules_->voice_detection->ProcessCaptureAudio(ca);
+
+  if (constants_.use_experimental_agc &&
+      public_submodules_->gain_control->is_enabled() &&
+      (!capture_nonlocked_.beamformer_enabled ||
+       private_submodules_->beamformer->is_target_present())) {
+    private_submodules_->agc_manager->Process(
+        ca->split_bands_const(0)[kBand0To8kHz], ca->num_frames_per_band(),
+        capture_nonlocked_.split_rate);
+  }
+  RETURN_ON_ERR(public_submodules_->gain_control->ProcessCaptureAudio(
+      ca, echo_cancellation()->stream_has_echo()));
+
+  if (fwd_synthesis_needed()) {
+    ca->MergeFrequencyBands();
+  }
+
+  // TODO(aluebs): Investigate if the transient suppression placement should be
+  // before or after the AGC.
+  if (capture_.transient_suppressor_enabled) {
+    float voice_probability =
+        private_submodules_->agc_manager.get()
+            ? private_submodules_->agc_manager->voice_probability()
+            : 1.f;
+
+    public_submodules_->transient_suppressor->Suppress(
+        ca->channels_f()[0], ca->num_frames(), ca->num_channels(),
+        ca->split_bands_const_f(0)[kBand0To8kHz], ca->num_frames_per_band(),
+        ca->keyboard_data(), ca->num_keyboard_frames(), voice_probability,
+        capture_.key_pressed);
+  }
+
+  // The level estimator operates on the recombined data.
+  public_submodules_->level_estimator->ProcessStream(ca);
+
+  capture_.was_stream_delay_set = false;
+  return kNoError;
+}
+
+```
+
+It can be seen that nearend's processing is comprehensive and the process is clear. It can be more practical to open different modules to meet the needs of different scenarios, which has a positive improvement effect for general communication systems. But in the actual work also found some hidden dangers in the process. In addition, the processing of each module of the structure is relatively low, which should be an excellent feature. However, it is difficult to reach the target effect in signal processing in complex cases. The waste of computational load due to low coupling is even more unavoidable.
