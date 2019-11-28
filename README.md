@@ -479,4 +479,9 @@ int AudioProcessingImpl::ProcessStreamLocked() {
 
 ```
 
-It can be seen that nearend's processing is comprehensive and the process is clear. It can be more practical to open different modules to meet the needs of different scenarios, which has a positive improvement effect for general communication systems. But in the actual work also found some hidden dangers in the process. In addition, the processing of each module of the structure is relatively low, which should be an excellent feature. However, it is difficult to reach the target effect in signal processing in complex cases. The waste of computational load due to low coupling is even more unavoidable.
+Conclusion
+----
+
+It can be seen that nearend's processing is comprehensive and the process is clear. It can be more practical to open different modules to meet the needs of different scenarios, which has a positive improvement effect for general communication systems. But in the actual work also found some hidden dangers in the process. 
+
+In addition, the processing of `each module` of the structure is *relatively low*, which should be an excellent feature. However, it is difficult to reach the target effect in signal processing in complex cases. The waste of computational load due to low coupling is even more unavoidable.
