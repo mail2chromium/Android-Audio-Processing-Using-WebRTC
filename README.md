@@ -1,4 +1,8 @@
-**Audio Processing**
+# "APM (Audio Processing Module) should be placed in the signal chain as close to the audio hardware abstraction layer (HAL) as possible."
+
+-----
+
+**Getting Started**
 ------
 High performance audio apps typically require more functionality than the simple ability to play or record sound. They demand responsive realtime system behavior. Webrtc provides browsers and *mobile applications* with Real-Time Communications (RTC) capabilities via simple APIs. 
 
