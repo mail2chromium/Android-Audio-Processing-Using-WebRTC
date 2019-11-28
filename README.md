@@ -114,6 +114,9 @@ apm-> set_num_channels (num_capture_input_channels, num_capture_output_channels)
 
 ```
 
+-------
+
+
 2. Capturing Audio Event
 ------
 
@@ -163,6 +166,9 @@ ns_speech_prob = apm-> noise_suppression () -> speech_probability ();
 
 ```
 
+-------
+
+
 3. Rendering the Audio Event
 ------
 
@@ -190,6 +196,8 @@ apm->set_num_reverse_channels(2);
 
 Repeate render and capture processing for the duration of the call.
 
+-------
+
 
 4. - Play Audio Event
 ------
@@ -199,6 +207,9 @@ To analysis far end `10ms` frame data of the audio stream, these data provide a 
 ```
 apm-> AnalyzeReverseStream (& far_frame));
 ``` 
+
+-------
+
 
 5. Release APM Event
 ------
