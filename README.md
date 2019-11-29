@@ -31,7 +31,7 @@ Most of the time voice communication is just a barrier in *VoIP Industry* due to
 **Choice of Audio Processing Technique**:
 -----
 
-There are two general approaches to audio programming in Android, either to use built-in (Android-SDK) or use (Android-NDK) approach. If you want to stay in the SDK in java, then you'ld simply try [AudioRecord](https://developer.android.com/reference/android/media/AudioRecord) & [AudioTrack](https://developer.android.com/reference/android/media/AudioTrack).
+There are two general approaches to audio programming in Android, either to use built-in (Android-SDK) or use (Android-NDK) approach. If you want to stay in the SDK in java, then you should simply try [AudioRecord](https://developer.android.com/reference/android/media/AudioRecord) & [AudioTrack](https://developer.android.com/reference/android/media/AudioTrack).
 
 1. The downside of first approach is that your *audio processing* also remains in java code, which could potentially be slower than compiled C-Code. The audio latency, without processing, is practically the same though.
 
