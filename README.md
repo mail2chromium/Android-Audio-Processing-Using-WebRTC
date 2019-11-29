@@ -17,7 +17,7 @@ WebRTC supports  (Audio Microphone Collection), (Encoding), and (RTP packet tran
 **Unreliable Audio Issues**
 -----
 
-Most of the time voice communication is just a barrier in *VoIP Industry* due to **muffled and stuttering voice**. Which includes `distortion`, `echo`, `noise` and very `unstisfactory` output results. The most common and even more worse **causes** that make real-time communication unhealthy are given as:
+Most of the time voice communication is just a barrier in *VoIP Industry* due to **muffled and stuttering voice**. Which includes `distortion`, `echo`, `noise` and very `unstisfactory` output results. The most common and even more worse **causes** that make bad real-time voice communications are given as:
 
 - Packet loss concealment
 - Echo cancellation
