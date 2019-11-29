@@ -31,17 +31,17 @@ Most of the time voice communication is just a barrier in *VoIP Industry* due to
 **Choice of Audio Processing Technique**:
 -----
 
-There is two general approaches to audio programming in Android, either to use built-in (SDK) or use (NDK) approach. If you wan to stay in the SDK in java, with [AudioRecord](https://developer.android.com/reference/android/media/AudioRecord) & [AudioTrack](https://developer.android.com/reference/android/media/AudioTrack).
+There are two general approaches to audio programming in Android, either to use built-in (Android-SDK) or use (Android-NDK) approach. If you want to stay in the SDK in java, then you'ld simply try [AudioRecord](https://developer.android.com/reference/android/media/AudioRecord) & [AudioTrack](https://developer.android.com/reference/android/media/AudioTrack).
 
-1. The downside of first approach is that your audio processing also remains in java code, which could potentially be slower than compiled C code. The audio latency, without processing, is practically the same though.
+1. The downside of first approach is that your *audio processing* also remains in java code, which could potentially be slower than compiled C-Code. The audio latency, without processing, is practically the same though.
 
-2. If you choose the NDK approach (C with OpenSL) over SDK (Java with AudioTrack), the setup will be more complex. So the very good example is to go with well-optimized audio-processing libraries such as;
+2. If you choose the *NDK* approach (C with OpenSL) over SDK (Java with AudioTrack), the setup will be more complex. So the very good example is to go with well-optimized audio-processing libraries such as;
 
 * [Speex](https://www.speex.org/)
 * [TarsosDSP](http://sapandiwakar.in/audio-processing-on-android-using-tarsosdsp/)
 * [Webrtc](https://chromium.googlesource.com/chromiumos/third_party/webrtc-apm/+/refs/heads/stabilize-12371.39.B/README.md)
 
-If you stick with Java, you will probably need a solid FFT library with support for Java (through a wrapper), so the best choice should be webrtc.
+If you stick with Java, you will probably need a *solid FFT library* with support for Java (through a wrapper), so the best choice should be **webrtc**.
 
 ------
 **Features**
@@ -105,7 +105,7 @@ apm-> voice_detection () -> set_likelihood (VoiceDetection :: kModerateLikelihoo
 apm-> Initialize ();
 ```
 
-After instantiation and configuration of APM module, now we'll look into account for various events involved in webrtc APM architecture such as;
+After instantiation and configuration of APM module, now we'll look into for various events involved in webrtc APM architecture such as;
 
 -------
 
@@ -113,7 +113,7 @@ After instantiation and configuration of APM module, now we'll look into account
 1. APM Initialization Event
 ------
 
-In this event, we'll simply set the required parameter for AM such as the (sample rate), (audio capturing & playback device) and (number of channels) of local and remote audio stream such as;
+In this event, we'll simply set the required parameter for APM such as the (sample rate), (audio capturing & playback device) and (number of channels) of local and remote audio stream such as;
 
 ```
 
@@ -136,7 +136,7 @@ apm-> set_num_channels (num_capture_input_channels, num_capture_output_channels)
 2. Capturing Audio Event
 ------
 
-To capture custom audio data from hardware abstraction layer such as microphone, one must know the following steps as given; 
+To capture (custom audio data) or (audio bytes) from hardware abstraction layer such as microphone, one must know the following steps as given; 
 
 ```
 apm-> gain_control () -> set_stream_analog_level (capture_level);
@@ -174,7 +174,7 @@ int err = apm-> ProcessStream (& near_frame);
 // under emulation mode, you must call this method after ProcessStream, get the recommended analog value of new audio HAL.
 capture_level = apm-> gain_control () -> stream_analog_level (); 
 
- // detect whether there is a voice, you must call this method after ProcessStream
+// detect whether there is a voice, you must call this method after ProcessStream
 stream_has_voice = apm-> voice_detection () -> stream_has_voice ();
 
 // returns the internal voice priority calculated the probability of the current frame.
@@ -196,7 +196,7 @@ After capturing of Audio Data, incoming stream is just passed to
 ProcessStream(capture_frame)
 ```
 
-that will process this input-data from APM.Now to get Ouput-data that is further played is actually obtained such as;
+*ProcessStream()* will process this audio-data from APM.Now to get Ouput audio-data that is further played, actually obtained as given;
 
 ```
 // Render frame arrives bound for the audio HAL
@@ -500,4 +500,4 @@ Conclusion
 
 It can be seen that nearend's processing is comprehensive and the process is clear. It can be more practical to open different modules to meet the needs of different scenarios, which has a positive improvement effect for general communication systems. But in the actual work also found some hidden dangers in the process. 
 
-In addition, the processing of `each module` of the structure is *relatively low*, which should be an excellent feature. However, it is difficult to reach the target effect in signal processing in complex cases. The waste of computational load due to low coupling is even more unavoidable.
+In addition, the processing of `each module` of the structure is *relatively low*, which should be an excellent feature. However, it is difficult to reach the target effect in signal processing in complex cases. The waste of computational load due to low coupling is even more un-avoidable.
