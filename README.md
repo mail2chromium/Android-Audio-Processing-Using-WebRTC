@@ -319,7 +319,11 @@ class VoiceDetection;
 
 * VoiceDetection: Voice activated detection module (VAD), which is used to detect the presence of voice. Used for codec and subsequent related processing. During a voice call, if one party is listening but not speaking, it will detect that no data has been collected at the output, and no data will be sent at this time. In this way, the sending status of the data is dynamically adjusted according to whether data is collected, and unnecessary waste of bandwidth is reduced.
 
-APM is divided into **two streams**,
+
+Stream Division of APM:
+----
+
+Stream division is often known as two times processing of APM. WebRtcAPM is divided into **two streams** such as;
 
 - A Near-End Stream (The near-end stream refers to the data entered from the microphone;)
 - A Far-End Stream ( The far-end stream refers to the received data;)
