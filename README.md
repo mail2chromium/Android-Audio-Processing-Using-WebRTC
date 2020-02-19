@@ -69,7 +69,7 @@ AudioProcessing is an event-driven system, which includes follwing events such a
 - Play Audio Event
 - Release APM Event
 
-To enable each of the audio processing module and before getting into basic event flow of APM, one should first invoke Audio Processing Instialization & Configuration such as;  
+To enable each of the audio processing module and before getting into basic event flow of APM, one should first invoke Audio Processing Initialization & Configuration such as;  
 
 ```
 AudioProcessing * apm = AudioProcessing :: Create (0);
