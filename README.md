@@ -512,12 +512,18 @@ int AudioProcessingImpl::ProcessStreamLocked() {
 }
 
 ```
+
+It can be seen that nearend's processing is comprehensive and the process is clear. It can be more practical to open different modules to meet the needs of different scenarios, which has a positive improvement effect for general communication systems. But in the actual work also found some hidden dangers in the process. 
+
+In addition, the processing of `each module` of the structure is *relatively low*, which should be an excellent feature. However, it is difficult to reach the target effect in signal processing in complex cases. The waste of computational load due to low coupling is even more un-avoidable.
+
 ----
 
 **Conclusion**
 
 ----
 
-It can be seen that nearend's processing is comprehensive and the process is clear. It can be more practical to open different modules to meet the needs of different scenarios, which has a positive improvement effect for general communication systems. But in the actual work also found some hidden dangers in the process. 
+Audio signal processing is a subfield of signal processing that is concerned with the electronic manipulation of audio signals. Audio signals are electronic representations of sound waves—longitudinal waves which travel through air, consisting of compressions and rarefactions. The energy contained in audio signals is typically measured in decibels. As audio signals may be represented in either digital or analog format, processing may occur in either domain. Analog processors operate directly on the electrical signal, while digital processors operate mathematically on its digital representation.
 
-In addition, the processing of `each module` of the structure is *relatively low*, which should be an excellent feature. However, it is difficult to reach the target effect in signal processing in complex cases. The waste of computational load due to low coupling is even more un-avoidable.
+WebRTC APM module is a complete package to perform every mathematical operation over signal processing. Best use of APM is, first to understand its basic functionality. I've tried to provide the best possible understanding of WebRTC module with a working example.
+
