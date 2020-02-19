@@ -311,7 +311,7 @@ class VoiceDetection;
 
 * GainControl: Gain Control Module (AGC). This module uses the characteristics of the voice to adjust the system hardware volume and the output signal size. The input volume can be controlled on the hardware. The software can only adjust the amplitude of the original signal. If the original signal has been broken, or the input signal is relatively small, there is nothing to do.
 
-* HighPassFilter: A high-pass filter that suppresses unwanted low-frequency signals. Internally, this is done using a customized IIR. You can modify the parameters to select the corresponding cut-off frequency. For some equipment with power frequency interference, a high-pass filter is required.
+* HighPassFilter: A high-pass filter that suppresses unwanted low-frequency signals. Internally, this is done using a customized IIR (`Infinite Impulse Response (digital filter design and signal processing`)). You can modify the parameters to select the corresponding cut-off frequency. For some equipment with power frequency interference, a high-pass filter is required.
 
 * LevelEstimator: Estimates the energy value of the signal.
 
