@@ -35,7 +35,7 @@ There are two general approaches to audio programming in Android, either to use 
 
 1. The downside of first approach is that your *audio processing* also remains in java code, which could potentially be slower than compiled C-Code. The audio latency, without processing, is practically the same though.
 
-2. If you choose the *NDK* approach (C with OpenSL) over SDK (Java with AudioTrack), the setup will be more complex. So the very good example is to go with well-optimized audio-processing libraries such as;
+2. If you choose the *NDK* approach (C with OpenSSL) over SDK (Java with AudioTrack), the setup will be more complex. So the very good example is to go with well-optimized audio-processing libraries such as;
 
 * [Speex](https://www.speex.org/)
 * [TarsosDSP](http://sapandiwakar.in/audio-processing-on-android-using-tarsosdsp/)
