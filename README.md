@@ -110,7 +110,8 @@ After instantiation and configuration of APM module, now we'll look into for var
 -------
 
 
-1. APM Initialization Event
+**1. APM Initialization Event**
+
 ------
 
 In this event, we'll simply set the required parameter for APM such as the (sample rate), (audio capturing & playback device) and (number of channels) of local and remote audio stream such as;
@@ -133,7 +134,8 @@ apm-> set_num_channels (num_capture_input_channels, num_capture_output_channels)
 -------
 
 
-2. Capturing Audio Event
+**2. Capturing Audio Event**
+
 ------
 
 To capture (custom audio data) or (audio bytes) from hardware abstraction layer such as microphone, one must know the following steps as given; 
@@ -185,7 +187,8 @@ ns_speech_prob = apm-> noise_suppression () -> speech_probability ();
 -------
 
 
-3. Rendering the Audio Event
+**3. Rendering the Audio Event**
+
 ------
 
 After capturing of Audio Data, incoming stream is just passed to 
@@ -215,7 +218,8 @@ Repeate render and capture processing for the duration of the call.
 -------
 
 
-4. - Play Audio Event
+**4. - Play Audio Event**
+
 ------
 
 To analysis far end `10ms` frame data of the audio stream, these data provide a reference for echo suppression. (Enable echo suppression when calling needs)
@@ -227,7 +231,7 @@ apm-> AnalyzeReverseStream (& far_frame));
 -------
 
 
-5. Release APM Event
+**5. Release APM Event**
 ------
 
 At the end, APM Module must be released such as;
@@ -248,6 +252,7 @@ apm->Initialize();
 
 -------
 **Webrtc Native Modules Hierarchy** 
+
 -------
 
 WebRTC Native Code package is meant for Android Developers who want to integrate Custom WebRTC into their applications. 
@@ -271,6 +276,7 @@ Here is simple hierarchy of webrtc native stack inside *JNI-Folder* of android p
 
 -------
 **Audio Processing Content**
+
 -------
 
 Here is the content of the `<audioprocessing.h>` file:
@@ -317,7 +323,8 @@ APM is divided into **two streams**,
 
  Now introduce them separately, this part of the code is in `<audio_processing_impl.cc>`, as given;
 
-To Process far-end stream:
+**To Process far-end stream:** 
+
 -------
 
 In this process, it involves 3-steps as given
@@ -359,7 +366,8 @@ int AudioProcessingImpl::ProcessReverseStreamLocked() {
 ```
 
 
-To Process near-end Streams
+**To Process near-end Streams**
+
 ------
 
 
@@ -495,7 +503,8 @@ int AudioProcessingImpl::ProcessStreamLocked() {
 
 ```
 
-Conclusion
+**Conclusion**
+
 ----
 
 It can be seen that nearend's processing is comprehensive and the process is clear. It can be more practical to open different modules to meet the needs of different scenarios, which has a positive improvement effect for general communication systems. But in the actual work also found some hidden dangers in the process. 
