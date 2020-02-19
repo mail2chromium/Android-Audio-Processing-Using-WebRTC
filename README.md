@@ -232,6 +232,7 @@ apm-> AnalyzeReverseStream (& far_frame));
 
 
 **5. Release APM Event**
+
 ------
 
 At the end, APM Module must be released such as;
@@ -251,6 +252,7 @@ apm->Initialize();
 
 
 -------
+
 **Webrtc Native Modules Hierarchy** 
 
 -------
@@ -275,6 +277,7 @@ Here is simple hierarchy of webrtc native stack inside *JNI-Folder* of android p
 
 
 -------
+
 **Audio Processing Content**
 
 -------
