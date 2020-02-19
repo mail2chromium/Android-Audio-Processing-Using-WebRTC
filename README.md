@@ -54,7 +54,7 @@ WebRTC offers a complete stack for voice communications. It includes not only th
 - [Voice Activity Detection](https://github.com/mail2chromium/Android-Voice-Activity-Detection-Using-WebRTC) **(VAD)** 
 - [Webrtc Audio Codecs](https://developer.mozilla.org/en-US/docs/Web/Media/Formats/WebRTC_codecs)  (The currently supported **Voice-Codecs** are `Opus`, `G.711`, `G.722`, `iLBC`, and `iSAC`)
 
-which also includes hardware access and control across multiple platforms i.e **Mobiles**.
+Which also includes hardware access and control across multiple platforms i.e **Mobiles**.
 These algorithms are mainly processed **after** collection of audio data from microphone and **before** encoding of audio data.
 
 
