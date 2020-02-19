@@ -326,6 +326,8 @@ APM is divided into **two streams**,
 
  Now introduce them separately, this part of the code is in `<audio_processing_impl.cc>`, as given;
 
+-------
+
 **To Process far-end stream:** 
 
 -------
@@ -368,6 +370,7 @@ int AudioProcessingImpl::ProcessReverseStreamLocked() {
 
 ```
 
+------
 
 **To Process near-end Streams**
 
@@ -505,6 +508,7 @@ int AudioProcessingImpl::ProcessStreamLocked() {
 }
 
 ```
+----
 
 **Conclusion**
 
