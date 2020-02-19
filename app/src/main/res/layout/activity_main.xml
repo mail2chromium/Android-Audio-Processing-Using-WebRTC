@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+
+    tools:context="com.webrtc.audioprocessing.MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="PORT:" />
+
+            <EditText
+                android:id="@+id/etTargetPort"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/edit_text"
+                android:inputType="phone" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="Target IP:" />
+
+            <EditText
+                android:id="@+id/etTargetIP"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/edit_text"
+                android:inputType="phone" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/edit_text"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="18sp"
+                    android:text="Speech Quality"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <CheckBox
+                    android:id="@+id/cbHighPassFilter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="High Pass Filter" />
+
+                <CheckBox
+                    android:id="@+id/cbSpeechIntelligibilityEnhance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="speech Intelligibility Enhance" />
+
+                <CheckBox
+                    android:id="@+id/cbBeamForming"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:enabled="false"
+                    android:text="Beam Forming"
+                    />
+
+                <CheckBox
+                    android:id="@+id/cbSpeaker"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Speaker" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:drawable/edit_text"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="18sp"
+                    android:text="Acoustic Echo Cancellation"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/rgAec"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/rbAecPC"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AEC_PC" />
+
+                    <RadioButton
+                        android:id="@+id/rbAecMobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
+                        android:text="AEC_Mobile" />
+
+                    <RadioButton
+                        android:id="@+id/rbAecNone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AEC_None" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/aecPcView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <CheckBox
+                            android:id="@+id/cbAecExtendFilter"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:text="AEC Extend Filter" />
+
+                        <CheckBox
+                            android:id="@+id/cbDelayAgnostic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Delay Agnostic"
+                            android:checked="true"/>
+
+                        <CheckBox
+                            android:id="@+id/cbNextGenerationAEC"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Next Generation Aec" />
+
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="AEC Pc Mode：" />
+
+                            <RadioGroup
+                                android:id="@+id/rgPcMode"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <RadioButton
+                                    android:id="@+id/rbLowSuppression"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="LowSuppression" />
+
+                                <RadioButton
+                                    android:id="@+id/rbModerateSuppression"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="ModerateSuppression" />
+
+                                <RadioButton
+                                    android:id="@+id/rbHighSuppression"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="HighSuppression"
+                                    android:checked="true"/>
+
+                            </RadioGroup>
+
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <RadioGroup
+                        android:id="@+id/rgMobileMode"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:padding="10dp"
+                            android:text="Aec Mobile Mode:" />
+
+                        <RadioButton
+                            android:id="@+id/rbQuietEarpieceOrHeadset"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="QuietEarpieceOrHeadset" />
+
+                        <RadioButton
+                            android:id="@+id/rbEarpiece"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Earpiece" />
+
+                        <RadioButton
+                            android:id="@+id/rbLoudEarpiece"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="LoudEarpiece" />
+
+                        <RadioButton
+                            android:id="@+id/rbSpeakerphone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Speakerphone"
+                            android:checked="true"/>
+
+                        <RadioButton
+                            android:id="@+id/rbLoudSpeakerphone"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="LoudSpeakerphone" />
+
+                    </RadioGroup>
+
+                    <LinearLayout
+                        android:id="@+id/aecBufferDelayView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="AEC Buffer Delay(ms):" />
+
+                        <EditText
+                            android:id="@+id/etAceBufferDelay"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@android:drawable/edit_text"
+                            android:ems="3"
+                            android:inputType="numberDecimal"
+                            android:minWidth="100dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/edit_text"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18sp"
+                android:text="Noise Suppression"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/cbNS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:text="NS" />
+
+            <CheckBox
+                android:id="@+id/cbExperimentalNs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Experimental NS"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:id="@+id/nsModeView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="NS Mode：" />
+
+                <RadioGroup
+                    android:id="@+id/rgNsMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/rbLow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Low" />
+
+                    <RadioButton
+                        android:id="@+id/rbModerate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Moderate" />
+
+                    <RadioButton
+                        android:id="@+id/rbHigh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="High"
+                        android:checked="true"/>
+
+                    <RadioButton
+                        android:id="@+id/rbVeryHigh"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="VeryHigh" />
+                </RadioGroup>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/edit_text"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18sp"
+                android:text="Auto Gain Controller"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/cbAgc"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="AGC" />
+
+            <CheckBox
+                android:id="@+id/cbExperimentalAGC"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Experimental Agc" />
+
+
+            <LinearLayout
+                android:id="@+id/agcModeView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AGC Mode：" />
+
+                <RadioGroup
+                    android:id="@+id/rgAgcMode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RadioButton
+                        android:id="@+id/rbAdaptiveAnalog"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AdaptiveAnalog" />
+
+                    <RadioButton
+                        android:id="@+id/rbAdaptiveDigital"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="AdaptiveDigital"
+                        android:checked="true"/>
+
+                    <RadioButton
+                        android:id="@+id/rbFixedDigital"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="FixedDigital" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/agcTlView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AGC Target Level [0-31]:" />
+
+                <EditText
+                    android:id="@+id/etAgcTargetLevel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/edit_text"
+                    android:ems="3"
+                    android:hint="please input agc target level"
+                    android:inputType="numberDecimal" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/agcCgView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="compression gain [0-90]:" />
+
+                <EditText
+                    android:id="@+id/etAgcCompressionGain"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@android:drawable/edit_text"
+                    android:ems="3"
+                    android:hint="please input compression gain"
+                    android:inputType="numberDecimal" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@android:drawable/edit_text"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18sp"
+                android:text="Voice Activity Detection"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <CheckBox
+                android:id="@+id/cbVad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VAD"
+                android:checked="true"/>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvReceivedCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Receive Count: " />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvSendCount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:text="Send Count: " />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp" />
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/btnStart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_column="1" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
