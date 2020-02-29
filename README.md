@@ -273,7 +273,7 @@ While working with webrtc native development in Android, *JNI Folder* should inc
 
 Here is simple hierarchy of webrtc native stack inside *JNI-Folder* of android project.
 
-![Native Modules Hierarchy](https://github.com/mail2chromium/Android-Audio-Processing-Using-WebRTC/blob/master/Content.png)
+![Native Modules Hierarchy](https://github.com/mail2chromium/Android-Audio-Processing-Using-WebRTC/blob/master/content.png)
 
 
 -------
