@@ -27,6 +27,12 @@ Most of the time, voice communication is just a barrier in *VoIP Industry* due t
 - Noise reduction and suppression
 
 
+For *real-time Communication and AudioProcessing* in Android, I will recommend you to must visit these refernces:
+
+- [Android_Realtime_Communication_Using_WebRTC](https://github.com/mail2chromium/Android_Realtime_Communication_Using_WebRTC)
+- [Android-Native-Development-For-WebRTC](https://github.com/mail2chromium/Android-Native-Development-For-WebRTC)
+
+
 
 **Choice of Audio Processing Technique**:
 -----
