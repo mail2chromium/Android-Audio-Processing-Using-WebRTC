@@ -65,8 +65,6 @@ Most of the time, voice communication is just a barrier in *VoIP Industry* due t
 - Automatic gain control problems
 - Noise reduction and suppression
 
-#unreliable-audio-issues
-
 -----
 
 #Choice of Audio Processing Technique:
