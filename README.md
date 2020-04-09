@@ -27,7 +27,7 @@ WebRTC supports  (Audio Microphone Collection), (Encoding), and (RTP packet tran
 - [Audio Processing Features](#audio-Processing-Features)
 - [Basic Workflow](#Basic-Workflow)
       
-    - [APM Initialization Event](#apm-Initialization-Event)
+    - [1. APM Initialization Event](#apm-Initialization-Event)
     - [Capturing Audio Event](#capturing-Audio-Event)
     - [Rendering Audio Event](#rendering-Audio-Event)
     - [Playout Audio Event](#playout-Audio-Event)
