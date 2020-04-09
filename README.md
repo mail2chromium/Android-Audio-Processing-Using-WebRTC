@@ -22,7 +22,7 @@ WebRTC supports  (Audio Microphone Collection), (Encoding), and (RTP packet tran
 # Content of this Document 
 
 
-- [Unreliable Audio Issues](*unreliable-audio-issues)
+- [Unreliable Audio Issues](#unreliable-audio-issues)
 - [Choice of Audio Processing Technique](#choice-of-Audio-Processing-Technique)
 - [Audio Processing Features](#audio-Processing-Features)
 - [Basic Workflow](#Basic-Workflow)
@@ -47,7 +47,7 @@ WebRTC supports  (Audio Microphone Collection), (Encoding), and (RTP packet tran
 
 -----
 
-**[Unreliable Audio Issues](#unreliable-audio-issues)**
+### [Unreliable Audio Issues](#unreliable-audio-issues)
 
 -----
 
