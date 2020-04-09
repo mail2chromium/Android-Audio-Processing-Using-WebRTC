@@ -62,7 +62,7 @@ Most of the time, voice communication is just a barrier in *VoIP Industry* due t
 
 -----
 
-**[Choice of Audio Processing Technique:](#choice-of-Audio-Processing-Technique)**
+### [Choice of Audio Processing Technique:](#choice-of-Audio-Processing-Technique)
 
 -----
 
@@ -80,7 +80,7 @@ If you stick with Java, you will probably need a *solid FFT library* with suppor
 
 ------
 
-**[Audio Processing Features:](#audio-Processing-Features)
+### [Audio Processing Features:](#audio-Processing-Features)
 
 ------
 WebRTC offers a complete stack for voice communications. It includes not only the necessary codecs, but other components necessary to great user experiences. This `APM` includes series of software-based algorithms such;
@@ -96,16 +96,16 @@ These algorithms are mainly processed **after** collection of audio data from mi
 
 -----
 
-**[Basic Workflow](#Basic-Workflow)**
+### [Basic Workflow](#Basic-Workflow)
 
 -----
 AudioProcessing is an event-driven system, which includes follwing events such as;
 
-- [APM Initialization Event](#apm-Initialization-Event)
-- [Capturing Audio Event](#capturing-Audio-Event)
-- [Rendering Audio Event](#rendering-Audio-Event)
-- [Playout Audio Event](#playout-Audio-Event)
-- [Release APM Event](#release-APM-Event)
+#### - [APM Initialization Event](#apm-Initialization-Event)
+#### - [Capturing Audio Event](#capturing-Audio-Event)
+#### - [Rendering Audio Event](#rendering-Audio-Event)
+#### - [Playout Audio Event](#playout-Audio-Event)
+#### - [Release APM Event](#release-APM-Event)
 
 To enable each of the audio processing module and before getting into basic event flow of APM, one should first invoke Audio Processing Initialization & Configuration such as;  
 
@@ -147,7 +147,7 @@ After instantiation and configuration of APM module, now we'll look into for var
 
 -------
 
-**1. [APM Initialization Event](#apm-Initialization-Event)**
+### 1. [APM Initialization Event](#apm-Initialization-Event)
 
 ------
 
@@ -171,7 +171,7 @@ apm-> set_num_channels (num_capture_input_channels, num_capture_output_channels)
 -------
 
 
-**2. [Capturing Audio Event](#capturing-Audio-Event)**
+### 2. [Capturing Audio Event](#capturing-Audio-Event)
 
 ------
 
@@ -224,7 +224,7 @@ ns_speech_prob = apm-> noise_suppression () -> speech_probability ();
 -------
 
 
-**3. [Rendering Audio Event](#rendering-Audio-Event)**
+### 3. [Rendering Audio Event](#rendering-Audio-Event)
 
 ------
 
@@ -255,7 +255,7 @@ Repeate render and capture processing for the duration of the call.
 -------
 
 
-**4. [Playout Audio Event](#playout-Audio-Event)**
+### 4. [Playout Audio Event](#playout-Audio-Event)
 
 ------
 
@@ -268,7 +268,7 @@ apm-> AnalyzeReverseStream (& far_frame));
 -------
 
 
-**5. [Release APM Event](#release-APM-Event)**
+### 5. [Release APM Event](#release-APM-Event)
 
 ------
 
@@ -289,7 +289,7 @@ apm->Initialize();
 
 -------
 
-**[WebRTC Native Module Hierarchy](#webRTC-Native-Module-Hierarchy)**
+### [WebRTC Native Module Hierarchy](#webRTC-Native-Module-Hierarchy)
 
 -------
 
@@ -314,7 +314,7 @@ Here is simple hierarchy of webrtc native stack inside *JNI-Folder* of android p
 
 -------
 
-**[Audio Processing Content](#audio-Processing-Content)**
+### [Audio Processing Content](#audio-Processing-Content)
 
 -------
 
@@ -356,7 +356,7 @@ class VoiceDetection;
 * VoiceDetection: Voice activated detection module (VAD), which is used to detect the presence of voice. Used for codec and subsequent related processing. During a voice call, if one party is listening but not speaking, it will detect that no data has been collected at the output, and no data will be sent at this time. In this way, the sending status of the data is dynamically adjusted according to whether data is collected, and unnecessary waste of bandwidth is reduced.
 
 
-**[Stream Division of APM](#stream-Division-of-APM)**
+### [Stream Division of APM](#stream-Division-of-APM)
 
 ----
 
@@ -369,7 +369,7 @@ Stream division is often known as two times processing of APM. WebRtcAPM is divi
 
 -------
 
-**1. [To Process Far-end Stream:](#to-Process-Far-end-Stream)**
+### 1. [To Process Far-end Stream:](#to-Process-Far-end-Stream)
 
 -------
 
@@ -413,7 +413,7 @@ int AudioProcessingImpl::ProcessReverseStreamLocked() {
 
 ------
 
-**2. [To Process Near-end Stream:](#to-Process-Near-end-Stream)**
+### 2. [To Process Near-end Stream:](#to-Process-Near-end-Stream)
 
 ------
 
@@ -556,7 +556,7 @@ In addition, the processing of `each module` of the structure is *relatively low
 
 ----
 
-**[Conclusion](#conclusion)**
+### [Conclusion](#conclusion)
 
 ----
 
