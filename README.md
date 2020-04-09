@@ -292,9 +292,6 @@ If you want to initialize the call again then you can use this simply;
 apm->Initialize();
 ```
 
-
-#Basic-Workflow
-
 -------
 
 **[WebRTC Native Module Hierarchy](#webRTC-Native-Module-Hierarchy)**
