@@ -38,9 +38,7 @@ For *real-time Communication and AudioProcessing* in Android, I will recommend y
     - [Release APM Event](#release-APM-Event)
 
 - [WebRTC Native Module Hierarchy](#webRTC-Native-Module-Hierarchy)
-  
 - [Audio Processing Content](#audio-Processing-Content)
-
 - [Stream Division of APM](#stream-Division-of-APM)
 
  	- [To Process Far-end Stream](#to-Process-Far-end-Stream)
@@ -48,13 +46,9 @@ For *real-time Communication and AudioProcessing* in Android, I will recommend y
 
 - [Conclusion](#conclusion)
 
-
-
-
-
 -----
 
-# Unreliable Audio Issues
+#Unreliable Audio Issues
 
 -----
 
