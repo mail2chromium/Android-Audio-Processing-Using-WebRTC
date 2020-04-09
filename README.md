@@ -101,11 +101,11 @@ These algorithms are mainly processed **after** collection of audio data from mi
 -----
 AudioProcessing is an event-driven system, which includes follwing events such as;
 
-#### - [APM Initialization Event](#apm-Initialization-Event)
-#### - [Capturing Audio Event](#capturing-Audio-Event)
-#### - [Rendering Audio Event](#rendering-Audio-Event)
-#### - [Playout Audio Event](#playout-Audio-Event)
-#### - [Release APM Event](#release-APM-Event)
+##### - [APM Initialization Event](#apm-Initialization-Event)
+##### - [Capturing Audio Event](#capturing-Audio-Event)
+##### - [Rendering Audio Event](#rendering-Audio-Event)
+##### - [Playout Audio Event](#playout-Audio-Event)
+##### - [Release APM Event](#release-APM-Event)
 
 To enable each of the audio processing module and before getting into basic event flow of APM, one should first invoke Audio Processing Initialization & Configuration such as;  
 
@@ -147,7 +147,7 @@ After instantiation and configuration of APM module, now we'll look into for var
 
 -------
 
-### 1. [APM Initialization Event](#apm-Initialization-Event)
+### [1. APM Initialization Event](#apm-Initialization-Event)
 
 ------
 
@@ -171,7 +171,7 @@ apm-> set_num_channels (num_capture_input_channels, num_capture_output_channels)
 -------
 
 
-### 2. [Capturing Audio Event](#capturing-Audio-Event)
+### [2. Capturing Audio Event](#capturing-Audio-Event)
 
 ------
 
@@ -224,7 +224,7 @@ ns_speech_prob = apm-> noise_suppression () -> speech_probability ();
 -------
 
 
-### 3. [Rendering Audio Event](#rendering-Audio-Event)
+### [3. Rendering Audio Event](#rendering-Audio-Event)
 
 ------
 
@@ -255,7 +255,7 @@ Repeate render and capture processing for the duration of the call.
 -------
 
 
-### 4. [Playout Audio Event](#playout-Audio-Event)
+### [4. Playout Audio Event](#playout-Audio-Event)
 
 ------
 
@@ -268,7 +268,7 @@ apm-> AnalyzeReverseStream (& far_frame));
 -------
 
 
-### 5. [Release APM Event](#release-APM-Event)
+### [5. Release APM Event](#release-APM-Event)
 
 ------
 
