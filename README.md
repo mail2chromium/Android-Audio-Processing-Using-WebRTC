@@ -26,29 +26,25 @@ For *real-time Communication and AudioProcessing* in Android, I will recommend y
 
 # Content of this Document 
 
-- [Unreliable Audio Issues](#unreliable-audio-issues)
-- [Choice of Audio Processing Technique](#choice-of-Audio-Processing-Technique)
-- [Audio Processing Features](#audio-Processing-Features)
-- [Basic Workflow](#Basic-Workflow)
-      
-    - [APM Initialization Event](#apm-Initialization-Event)
-    - [Capturing Audio Event](#capturing-Audio-Event)
-    - [Rendering Audio Event](#rendering-Audio-Event)
-    - [Playout Audio Event](#playout-Audio-Event)
-    - [Release APM Event](#release-APM-Event)
-
-- [WebRTC Native Module Hierarchy](#webRTC-Native-Module-Hierarchy)
-- [Audio Processing Content](#audio-Processing-Content)
-- [Stream Division of APM](#stream-Division-of-APM)
-
- 	- [To Process Far-end Stream](#to-Process-Far-end-Stream)
- 	- [To Process Near-end Stream](#to-Process-Near-end-Stream)
-
-- [Conclusion](#conclusion)
+[Unreliable Audio Issues](#unreliable-audio-issues)
+[Choice of Audio Processing Technique](#choice-of-Audio-Processing-Technique)
+[Audio Processing Features](#audio-Processing-Features)
+[Basic Workflow](#Basic-Workflow) 
+   - [APM Initialization Event](#apm-Initialization-Event)
+   - [Capturing Audio Event](#capturing-Audio-Event)
+   - [Rendering Audio Event](#rendering-Audio-Event)
+   - [Playout Audio Event](#playout-Audio-Event)
+   - [Release APM Event](#release-APM-Event)
+[WebRTC Native Module Hierarchy](#webRTC-Native-Module-Hierarchy)
+[Audio Processing Content](#audio-Processing-Content)
+[Stream Division of APM](#stream-Division-of-APM)
+ - [To Process Far-end Stream](#to-Process-Far-end-Stream)
+ - [To Process Near-end Stream](#to-Process-Near-end-Stream)
+[Conclusion](#conclusion)
 
 -----
 
-# Unreliable Audio Issues
+# [Unreliable Audio Issues](#unreliable-audio-issues)
 -----
 
 Most of the time, voice communication is just a barrier in *VoIP Industry* due to **muffled and stuttering voice**. Which includes `distortion`, `echo`, `noise` and very `unstisfactory` output results. The most common and even more worse **causes** that make bad real-time voice communications are given as:
