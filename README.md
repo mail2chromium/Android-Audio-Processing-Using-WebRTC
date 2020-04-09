@@ -6,15 +6,54 @@
 ------
 High performance audio apps typically require more functionality than the simple ability to play or record sound. They demand responsive realtime system behavior. Webrtc provides browsers and *mobile applications* with Real-Time Communications (RTC) capabilities via simple APIs. 
 
+For *real-time Communication and AudioProcessing* in Android, I will recommend you to must visit these refernces:
+
+- [Android_Realtime_Communication_Using_WebRTC](https://github.com/mail2chromium/Android_Realtime_Communication_Using_WebRTC)
+- [Android-Native-Development-For-WebRTC](https://github.com/mail2chromium/Android-Native-Development-For-WebRTC)
+
 WebRTC supports  (Audio Microphone Collection), (Encoding), and (RTP packet transmission). Features of *Audio Data* that Webrtc-APM accepts only include;
 
 - **16-bit** linear PCM Audio Data.
 - 160-frames of **10 ms**. (Optimal Sample Rate)
 - One or Multiple channels should be interleaved.
 
+For *real-time Communication and AudioProcessing* in Android, I will recommend you to must visit these refernces:
+
+- [Android_Realtime_Communication_Using_WebRTC](https://github.com/mail2chromium/Android_Realtime_Communication_Using_WebRTC)
+- [Android-Native-Development-For-WebRTC](https://github.com/mail2chromium/Android-Native-Development-For-WebRTC)
 
 -----
-**Unreliable Audio Issues**
+
+# Content of this Document 
+
+- [Unreliable Audio Issues](#unreliable-audio-issues)
+- [Choice of Audio Processing Technique](#choice-of-Audio-Processing-Technique)
+- [Audio Processing Features](#audio-Processing-Features)
+- [Basic Workflow](#Basic-Workflow)
+      
+    - [APM Initialization Event](#apm-Initialization-Event)
+    - [Capturing Audio Event](#capturing-Audio-Event)
+    - [Rendering Audio Event](#rendering-Audio-Event)
+    - [Playout Audio Event](#playout-Audio-Event)
+    - [Release APM Event](#release-APM-Event)
+
+- [WebRTC Native Module Hierarchy](#webRTC-Native-Module-Hierarchy)
+  
+- [Audio Processing Content](#audio-Processing-Content)
+
+- [Stream Division of APM](#stream-Division-of-APM)
+
+ 	- [To Process Far-end Stream](#to-Process-Far-end-Stream)
+ 	- [To Process Near-end Stream](#to-Process-Near-end-Stream)
+
+- [Conclusion](#conclusion)
+
+
+
+
+
+-----
+#Unreliable Audio Issues
 -----
 
 Most of the time, voice communication is just a barrier in *VoIP Industry* due to **muffled and stuttering voice**. Which includes `distortion`, `echo`, `noise` and very `unstisfactory` output results. The most common and even more worse **causes** that make bad real-time voice communications are given as:
@@ -26,15 +65,12 @@ Most of the time, voice communication is just a barrier in *VoIP Industry* due t
 - Automatic gain control problems
 - Noise reduction and suppression
 
+#unreliable-audio-issues
 
-For *real-time Communication and AudioProcessing* in Android, I will recommend you to must visit these refernces:
+-----
 
-- [Android_Realtime_Communication_Using_WebRTC](https://github.com/mail2chromium/Android_Realtime_Communication_Using_WebRTC)
-- [Android-Native-Development-For-WebRTC](https://github.com/mail2chromium/Android-Native-Development-For-WebRTC)
+#Choice of Audio Processing Technique:
 
-
-
-**Choice of Audio Processing Technique**:
 -----
 
 There are two general approaches to audio programming in Android, either to use built-in (Android-SDK) or use (Android-NDK) approach. If you want to stay in the SDK in java, then you should simply try [AudioRecord](https://developer.android.com/reference/android/media/AudioRecord) & [AudioTrack](https://developer.android.com/reference/android/media/AudioTrack).
@@ -49,8 +85,10 @@ There are two general approaches to audio programming in Android, either to use 
 
 If you stick with Java, you will probably need a *solid FFT library* with support for Java (through a wrapper), so the best choice should be **webrtc**.
 
+#choice-of-Audio-Processing-Technique
+
 ------
-**Features**
+#Audio Processing Features
 ------
 WebRTC offers a complete stack for voice communications. It includes not only the necessary codecs, but other components necessary to great user experiences. This `APM` includes series of software-based algorithms such;
 
@@ -63,9 +101,10 @@ WebRTC offers a complete stack for voice communications. It includes not only th
 Which also includes hardware access and control across multiple platforms i.e **Mobiles**.
 These algorithms are mainly processed **after** collection of audio data from microphone and **before** encoding of audio data.
 
+#Audio-Processing-Features
 
 -----
-**Basic workflow:**
+#Basic Workflow:
 -----
 AudioProcessing is an event-driven system, which includes follwing events such as;
 
@@ -114,7 +153,6 @@ apm-> Initialize ();
 After instantiation and configuration of APM module, now we'll look into for various events involved in webrtc APM architecture such as;
 
 -------
-
 
 **1. APM Initialization Event**
 
@@ -193,7 +231,7 @@ ns_speech_prob = apm-> noise_suppression () -> speech_probability ();
 -------
 
 
-**3. Rendering the Audio Event**
+**3. Rendering Audio Event**
 
 ------
 
@@ -257,10 +295,10 @@ apm->Initialize();
 ```
 
 
+#Basic-Workflow
+
 -------
-
 **Webrtc Native Modules Hierarchy** 
-
 -------
 
 WebRTC Native Code package is meant for Android Developers who want to integrate Custom WebRTC into their applications. 
@@ -338,7 +376,7 @@ Stream division is often known as two times processing of APM. WebRtcAPM is divi
 
 -------
 
-**To Process far-end stream:** 
+**To Process Far-end Stream:** 
 
 -------
 
@@ -382,7 +420,7 @@ int AudioProcessingImpl::ProcessReverseStreamLocked() {
 
 ------
 
-**To Process near-end Streams**
+**To Process Near-end Streams**
 
 ------
 
