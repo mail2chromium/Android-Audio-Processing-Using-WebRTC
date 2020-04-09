@@ -53,7 +53,9 @@ For *real-time Communication and AudioProcessing* in Android, I will recommend y
 
 
 -----
+
 # Unreliable Audio Issues
+
 -----
 
 Most of the time, voice communication is just a barrier in *VoIP Industry* due to **muffled and stuttering voice**. Which includes `distortion`, `echo`, `noise` and very `unstisfactory` output results. The most common and even more worse **causes** that make bad real-time voice communications are given as:
@@ -67,7 +69,7 @@ Most of the time, voice communication is just a barrier in *VoIP Industry* due t
 
 -----
 
-#Choice of Audio Processing Technique:
+# Choice of Audio Processing Technique:
 
 -----
 
@@ -83,10 +85,10 @@ There are two general approaches to audio programming in Android, either to use 
 
 If you stick with Java, you will probably need a *solid FFT library* with support for Java (through a wrapper), so the best choice should be **webrtc**.
 
-#choice-of-Audio-Processing-Technique
-
 ------
-#Audio Processing Features
+
+# Audio Processing Features
+
 ------
 WebRTC offers a complete stack for voice communications. It includes not only the necessary codecs, but other components necessary to great user experiences. This `APM` includes series of software-based algorithms such;
 
@@ -99,10 +101,10 @@ WebRTC offers a complete stack for voice communications. It includes not only th
 Which also includes hardware access and control across multiple platforms i.e **Mobiles**.
 These algorithms are mainly processed **after** collection of audio data from microphone and **before** encoding of audio data.
 
-#Audio-Processing-Features
-
 -----
-#Basic Workflow:
+
+# Basic Workflow:
+
 -----
 AudioProcessing is an event-driven system, which includes follwing events such as;
 
@@ -152,7 +154,7 @@ After instantiation and configuration of APM module, now we'll look into for var
 
 -------
 
-**1. APM Initialization Event**
+# 1. APM Initialization Event
 
 ------
 
@@ -176,7 +178,7 @@ apm-> set_num_channels (num_capture_input_channels, num_capture_output_channels)
 -------
 
 
-**2. Capturing Audio Event**
+# 2. Capturing Audio Event
 
 ------
 
@@ -229,7 +231,7 @@ ns_speech_prob = apm-> noise_suppression () -> speech_probability ();
 -------
 
 
-**3. Rendering Audio Event**
+# 3. Rendering Audio Event
 
 ------
 
@@ -260,7 +262,7 @@ Repeate render and capture processing for the duration of the call.
 -------
 
 
-**4. - Play Audio Event**
+# 4. Playout Audio Event
 
 ------
 
@@ -273,7 +275,7 @@ apm-> AnalyzeReverseStream (& far_frame));
 -------
 
 
-**5. Release APM Event**
+# 5. Release APM Event
 
 ------
 
@@ -296,7 +298,9 @@ apm->Initialize();
 #Basic-Workflow
 
 -------
-**Webrtc Native Modules Hierarchy** 
+
+# Webrtc Native Modules Hierarchy
+
 -------
 
 WebRTC Native Code package is meant for Android Developers who want to integrate Custom WebRTC into their applications. 
@@ -320,7 +324,7 @@ Here is simple hierarchy of webrtc native stack inside *JNI-Folder* of android p
 
 -------
 
-**Audio Processing Content**
+# Audio Processing Content
 
 -------
 
@@ -362,7 +366,8 @@ class VoiceDetection;
 * VoiceDetection: Voice activated detection module (VAD), which is used to detect the presence of voice. Used for codec and subsequent related processing. During a voice call, if one party is listening but not speaking, it will detect that no data has been collected at the output, and no data will be sent at this time. In this way, the sending status of the data is dynamically adjusted according to whether data is collected, and unnecessary waste of bandwidth is reduced.
 
 
-Stream Division of APM:
+# Stream Division of APM:
+
 ----
 
 Stream division is often known as two times processing of APM. WebRtcAPM is divided into **two streams** such as;
@@ -374,7 +379,7 @@ Stream division is often known as two times processing of APM. WebRtcAPM is divi
 
 -------
 
-**To Process Far-end Stream:** 
+# 1. To Process Far-end Stream: 
 
 -------
 
@@ -418,7 +423,7 @@ int AudioProcessingImpl::ProcessReverseStreamLocked() {
 
 ------
 
-**To Process Near-end Streams**
+# 2. To Process Near-end Streams:
 
 ------
 
@@ -561,7 +566,7 @@ In addition, the processing of `each module` of the structure is *relatively low
 
 ----
 
-**Conclusion**
+# Conclusion
 
 ----
 
