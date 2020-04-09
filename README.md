@@ -17,11 +17,6 @@ WebRTC supports  (Audio Microphone Collection), (Encoding), and (RTP packet tran
 - 160-frames of **10 ms**. (Optimal Sample Rate)
 - One or Multiple channels should be interleaved.
 
-For *real-time Communication and AudioProcessing* in Android, I will recommend you to must visit these refernces:
-
-- [Android_Realtime_Communication_Using_WebRTC](https://github.com/mail2chromium/Android_Realtime_Communication_Using_WebRTC)
-- [Android-Native-Development-For-WebRTC](https://github.com/mail2chromium/Android-Native-Development-For-WebRTC)
-
 -----
 
 # Content of this Document 
@@ -52,7 +47,7 @@ For *real-time Communication and AudioProcessing* in Android, I will recommend y
 
 -----
 
-**[Unreliable Audio Issues](#unreliable-audio-issues)**
+[Unreliable Audio Issues](#unreliable-audio-issues)
 
 -----
 
