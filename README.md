@@ -48,8 +48,7 @@ For *real-time Communication and AudioProcessing* in Android, I will recommend y
 
 -----
 
-#Unreliable Audio Issues
-
+# Unreliable Audio Issues
 -----
 
 Most of the time, voice communication is just a barrier in *VoIP Industry* due to **muffled and stuttering voice**. Which includes `distortion`, `echo`, `noise` and very `unstisfactory` output results. The most common and even more worse **causes** that make bad real-time voice communications are given as:
