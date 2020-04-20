@@ -6,6 +6,11 @@
 ------
 High performance audio apps typically require more functionality than the simple ability to play or record sound. They demand responsive realtime system behavior. Webrtc provides browsers and *mobile applications* with Real-Time Communications (RTC) capabilities via simple APIs. 
 
+For *Compilation and Building the WebRTC Library for Android*, you should have to look into this refernce:
+
+- [Compile_WebRTC_Library_For_Android](https://github.com/mail2chromium/Compile_WebRTC_Library_For_Android)
+
+
 For *real-time Communication and AudioProcessing* in Android, I will recommend you to must visit these refernces:
 
 - [Android_Realtime_Communication_Using_WebRTC](https://github.com/mail2chromium/Android_Realtime_Communication_Using_WebRTC)
