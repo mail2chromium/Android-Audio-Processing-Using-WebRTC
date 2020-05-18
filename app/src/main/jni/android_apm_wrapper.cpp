@@ -1,8 +1,5 @@
 /**
  * These are wrappers of native webrtc echo cancellation mobile edition functions.
- *
- *@author billhoo E-mail: billhoo@126.com
- *@version 0.1 2013-3-8
  */
 #include <jni.h>
 #include <stdlib.h> // for NULL
