@@ -1,9 +1,6 @@
 package com.webrtc.audioprocessing;
 
 
-/**
- * Created by sino on 2016-05-30.
- */
 public class ApmViewModel {
 
     private String targetPort = "2004";
