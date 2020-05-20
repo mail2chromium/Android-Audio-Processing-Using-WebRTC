@@ -124,7 +124,8 @@ apm-> level_estimator () -> Enable (true);
 apm-> echo_cancellation () -> Enable (true); 
 apm-> echo_cancellation () -> enable_metrics (true);
 
-// Enable clock compensation module (sound capture device clock frequency clock frequency and playback devices may be different)
+// Enable clock compensation module (sound capture device clock frequency and 
+// playback device clock frequency may be different)
 apm-> echo_cancellation () -> enable_drift_compensation (true);
 
 // Enable gain control module!
