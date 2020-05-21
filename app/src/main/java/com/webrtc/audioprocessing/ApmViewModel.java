@@ -3,8 +3,8 @@ package com.webrtc.audioprocessing;
 
 public class ApmViewModel {
 
-    private String targetPort = "2004";
-    private String targetIP = "192.168.1.167";
+    private String targetPort = "1234";
+    private String targetIP = "0.0.0.0";
     private String agcCompressionGain = "9";
     private String agcTargetLevel = "6";
     private String aceBufferDelay = "150";
