@@ -245,8 +245,22 @@ ProcessStream(capture_frame)
 *ProcessStream()* will process this audio-data from APM. Now to get Ouput audio-data that is further played, we actually obtained using *ProcessReverseStream()* which is internally dealing such as;
 
 ```
-// Render frame arrives bound for the audio HAL
-AnalyzeReverseStream(render_frame);
+  // Analyzes a 10 ms |frame| of the reverse direction audio stream. The frame
+  // will not be modified. On the client-side, this is the far-end (or to be
+  // rendered) audio.
+  //
+  // It is only necessary to provide this if echo processing is enabled, as the
+  // reverse stream forms the echo reference signal. It is recommended, but not
+  // necessary, to provide if gain control is enabled. On the server-side this
+  // typically will not be used. If you're not sure what to pass in here,
+  // chances are you don't need to use it.
+  //
+  // The |sample_rate_hz_|, |num_channels_|, and |samples_per_channel_|
+  // members of |frame| must be valid. |sample_rate_hz_| must correspond to
+  // |input_sample_rate_hz()|
+
+  // Render frame arrives bound for the audio HAL
+  AnalyzeReverseStream(render_frame);
 ``` 
 
 By this way, by default, capture event is used to capture Mono-Channel stream while render object is used to fetch stereo-channel stream as given 
