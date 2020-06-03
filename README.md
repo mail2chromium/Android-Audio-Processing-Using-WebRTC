@@ -242,7 +242,7 @@ After capturing of Audio Data, incoming stream is just passed to
 ProcessStream(capture_frame)
 ```
 
-*ProcessStream()* will process this audio-data from APM.Now to get Ouput audio-data that is further played, actually obtained as given;
+*ProcessStream()* will process this audio-data from APM. Now to get Ouput audio-data that is further played, we actually obtained using *ProcessReverseStream()* which is internally dealing such as;
 
 ```
 // Render frame arrives bound for the audio HAL
