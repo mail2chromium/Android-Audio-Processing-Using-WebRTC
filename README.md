@@ -265,11 +265,13 @@ Repeate render and capture processing for the duration of the call.
 
 ------
 
-To analysis far end `10ms` frame data of the audio stream, these data provide a reference for echo suppression. (Enable echo suppression when calling needs)
+To analysis far end `10ms` frame data of the audio stream, these data provide a reference for echo suppression. (Enable echo suppression when calling needs). 
 
 ```
 apm-> AnalyzeReverseStream (& far_frame));
 ``` 
+
+At this point you can get far-end data (`Audio Bytes`) from *ProcessRenderStream()* to be further played using hardware abstraction layer speaker.
 
 -------
 
