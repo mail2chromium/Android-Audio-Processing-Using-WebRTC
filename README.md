@@ -88,6 +88,24 @@ If you stick with Java, you will probably need a *solid FFT library* with suppor
 ### [Audio Processing Features:](#audio-Processing-Features)
 
 ------
+
+Applying voice enhancement effects to the microphone signal is the responsibility of the APM. For VoIP calls, these effects are necessary, and some examples are automatic gain control (AGC), noise suppression (NS), and echo cancellation (AEC) (AGC).
+
+The API for APM resides in [`/modules/audio_processing/include`][https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/audio_processing/include].
+APM is created using the [`AudioProcessingBuilder`][https://source.chromium.org/chromium/chromium/src/+/master:third_party/webrtc/modules/audio_processing/include/audio_processing.h]
+builder that allows it to be customized and configured.
+
+Some specific aspects of APM include that:
+*  APM is fully `thread-safe` in that it can be accessed concurrently from
+   different threads.
+*  APM handles for any **input** `sample rates < 384 kHz` and achieves this by
+   automatic reconfiguration whenever a new sample format is observed.
+*  APM handles any number of microphone channels and loudspeaker channels, with
+   the same automatic reconfiguration as for the sample rates.
+
+> APM can either be used as part of the *WebRTC native pipeline*, or *standalone*.
+
+
 WebRTC offers a complete stack for voice communications. It includes not only the necessary codecs, but other components necessary to great user experiences. This `APM` includes series of software-based algorithms such;
 
 - [Acoustic Echo Cancellation](https://github.com/mail2chromium/Android-Acoustic-Echo-Cancelletion-Using-WebRTC) **(AEC)**
